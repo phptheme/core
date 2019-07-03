@@ -2,11 +2,10 @@
     "name": "phptheme/core",
     "license": "MIT",
     "require": {
-        "phptheme/view": "dev-master"
     },
     "autoload": {
         "psr-4": [
-            "PHPTheme\\Core\\": ""
+            "PHPTheme\\Core\\" : ""
         ]
     }
 }

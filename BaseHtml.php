@@ -19,7 +19,7 @@ abstract class BaseHtml
         return htmlspecialchars($string, $specialCharsFlags, $encoding);
     }
 
-    public function mergeClass($class1, $class2)
+    public static function mergeClass($class1, $class2)
     {
         if (is_array($class2))
         {
@@ -42,7 +42,7 @@ abstract class BaseHtml
         return $class2;
     }
 
-    public function mergeOptions(array $array1, array $array2)
+    public static function mergeOptions(array $array1, array $array2)
     {
         $args = func_get_args();
 
@@ -73,7 +73,7 @@ abstract class BaseHtml
         return $return;
     }
 
-    public function renderOptions($options) : string
+    public static function renderOptions($options) : string
     {
         $return = '';
 
@@ -93,28 +93,40 @@ abstract class BaseHtml
         return $return;
     }
 
-    public function tag(string $tag, string $content, array $options = [])
+    public static function openTag(string $tag, array $options = [])
     {
-        $return = '';
-
         if ($tag)
         {
-            $return .= '<' . $this->tag . $this->renderOptions($options) . '>';
+            return '<' . $tag . static::renderOptions($options) . '>';
         }
+
+        return '';
+    }
+
+    public static function closeTag(string $tag)
+    {
+        if ($tag)
+        {
+            return '</' . $tag . '>';
+        }
+
+        return '';
+    }
+
+    public static function tag(string $tag, string $content, array $options = [])
+    {
+        $return = static::openTag($tag, $options);
 
         $return .= $content;
 
-        if ($tag)
-        {
-            $return .= '</' . $tag . '>';
-        }
+        $return .= static::closeTag($tag);
 
         return $return;
     }
 
-    public function shortTag(string $tag, array $options = [])
+    public static function shortTag(string $tag, array $options = [])
     {
-        return '<' . $tag . $this->renderOptions($options) . ' />';
+        return '<' . $tag . static::renderOptions($options) . ' />';
     }
 
 }

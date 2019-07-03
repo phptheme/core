@@ -9,6 +9,60 @@ namespace PHPTheme\Core;
 abstract class BaseHtml
 {
 
+    public function mergeClass($class1, $class2)
+    {
+        if (is_array($class2))
+        {
+            if (!is_array($class1))
+            {
+                $class1 = explode(' ', $class1);
+            }
+
+            foreach($class2 as $class)
+            {
+                if (array_search($class, $class1) === false)
+                {
+                    $class1[] = $class;
+                }
+            }
+
+            return $class1;
+        }
+
+        return $class2;
+    }
+
+    public function mergeOptions(array $array1, array $array2)
+    {
+        $args = func_get_args();
+
+        $return = array_shift($args);
+
+        if (count($args) > 1)
+        {
+            foreach($args as $array)
+            {
+                $return = static::mergeOptions($return, $array);
+            }
+
+            return $return;
+        }
+
+        foreach($array2 as $key => $value)
+        {
+            if (($key == 'class') && array_key_exists($key, $return))
+            {
+                $return[$key] = static::mergeClass($return[$key], $value);
+            }
+            else
+            {
+                $return[$key] = $value;
+            }
+        }
+
+        return $return;
+    }
+
     public function renderOptions($options) : string
     {
         $return = '';

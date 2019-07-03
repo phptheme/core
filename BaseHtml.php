@@ -9,6 +9,16 @@ namespace PHPTheme\Core;
 abstract class BaseHtml
 {
 
+    public static function escape($string, $encoding = 'utf-8', $specialCharsFlags = null)
+    {
+        if (!$specialCharsFlags)
+        {
+            $specialCharsFlags = ENT_QUOTES | ENT_SUBSTITUTE;
+        }
+
+        return htmlspecialchars($string, $specialCharsFlags, $encoding);
+    }
+
     public function mergeClass($class1, $class2)
     {
         if (is_array($class2))

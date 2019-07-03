@@ -1,11 +1,12 @@
 {
     "name": "phptheme/core",
     "license": "MIT",
-    "require": {
-    },
     "autoload": {
-        "psr-4": [
-            "PHPTheme\\Core\\" : ""
-        ]
+        "psr-4": {
+			"PHPTheme\\Core\\" : ""
+        }
+    },
+    "require": {
+        "phptheme/view": "dev-master"
     }
 }

@@ -4,7 +4,7 @@
  * @link http://getphptheme.com
  * @license MIT License
  */
-namespace PHPTheme\Core;
+namespace PhpTheme\Core;
 
 abstract class Widget extends BaseWidget
 {

@@ -4,14 +4,26 @@
  * @link http://getphptheme.com
  * @license MIT License
  */
-namespace PHPTheme\Core;
+namespace PhpTheme\Core;
 
-use PHPTheme\View\RenderFileTrait;
+use PhpTheme\View\RenderFileTrait;
 
 abstract class BaseTheme
 {
 
-    public $baseUrl;
+    use RenderFileTrait;
+
+    public $baseUrl = '';
+
+    public function beginContent()
+    {
+        ob_start();
+    }
+
+    public function endContent()
+    {
+        return ob_get_clean();
+    }
 
     public function widget(string $class, array $params = [])
     {
@@ -24,27 +36,36 @@ abstract class BaseTheme
     {
         $params['theme'] = $this;
 
-        $widget = $class::factory($this, $params);
+        $widget = $class::factory($params);
 
         return $widget;
     }
 
     public function beginWidget(string $class, array $params = [])
     {
-        $widget = $class::factory($this, $params);
+        $widget = $this->createWidget($class, $params);
 
-        ob_start();
+        $this->beginContent();
 
         return $widget;
     }
 
-    public function endWidget($widget)
+    public function endWidget($widget, $display = true)
     {
-        $content = ob_get_clean();
+        $content = $this->endContent();
 
         $widget->content = $content;
 
-        return $widget->run();
+        $return = $widget->run();
+
+        if ($display)
+        {
+            echo $return;
+        }
+        else
+        {
+            return $return;
+        }
     }
 
 }

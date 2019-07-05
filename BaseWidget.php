@@ -4,11 +4,11 @@
  * @link http://getphptheme.com
  * @license MIT License
  */
-namespace PHPTheme\Core;
+namespace PhpTheme\Core;
 
 use ReflectionClass;
 
-abstract class BaseWidget extends View
+abstract class BaseWidget extends \PHPTheme\View\View
 {
 
     public $theme;

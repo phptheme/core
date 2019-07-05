@@ -8,7 +8,7 @@ namespace PhpTheme\Core;
 
 use ReflectionClass;
 
-abstract class BaseWidget extends \PHPTheme\View\View
+abstract class BaseWidget
 {
 
     public $theme;

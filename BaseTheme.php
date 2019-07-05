@@ -15,6 +15,11 @@ abstract class BaseTheme
 
     public $baseUrl = '';
 
+    public function escape($string, $encoding = 'utf-8', $specialCharsFlags = null)
+    {
+        return Html::escape($string, $encoding, $specialCharsFlags);
+    }
+
     public function beginContent()
     {
         ob_start();

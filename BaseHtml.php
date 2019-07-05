@@ -93,7 +93,7 @@ abstract class BaseHtml
         return $return;
     }
 
-    public static function openTag(string $tag, array $options = [])
+    public static function beginTag(string $tag, array $options = [])
     {
         if ($tag)
         {
@@ -103,7 +103,7 @@ abstract class BaseHtml
         return '';
     }
 
-    public static function closeTag(string $tag)
+    public static function endTag(string $tag)
     {
         if ($tag)
         {
@@ -115,11 +115,11 @@ abstract class BaseHtml
 
     public static function tag(string $tag, string $content, array $options = [])
     {
-        $return = static::openTag($tag, $options);
+        $return = static::beginTag($tag, $options);
 
         $return .= $content;
 
-        $return .= static::closeTag($tag);
+        $return .= static::endTag($tag);
 
         return $return;
     }

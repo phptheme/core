@@ -11,6 +11,8 @@ use PHPTheme\Core\Html;
 class Menu extends \PHPTheme\Core\Widget
 {
 
+    const MENU_ITEM = MenuItem::class;
+
     public $items = [];
 
     public $options = [];
@@ -69,7 +71,7 @@ class Menu extends \PHPTheme\Core\Widget
 
         $theme = $this->theme;        
 
-        $item = $theme->createWidget($theme::MENU_ITEM, $params);
+        $item = $theme->createWidget(static::MENU_ITEM, $params);
 
         return $item;
     }
@@ -83,11 +85,16 @@ class Menu extends \PHPTheme\Core\Widget
             $items[$key] = $this->createItem($item);
         }
 
-        return $this->render('menu', [
-            'items' => $items,
-            'tag' => $this->tag,
-            'options' => $this->options
-        ]);
+        $content = '';
+
+        foreach($items as $item)
+        {
+            $content .= $item->run();
+        }
+
+        $options = Html::mergeOptions($this->defaultOptions, $this->options);
+
+        return Html::tag($this->tag, $content, $options);
     }
 
 }

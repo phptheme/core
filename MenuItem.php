@@ -47,16 +47,16 @@ class MenuItem extends \PHPTheme\Core\Widget
             $linkOptions = Html::mergeOptions($linkOptions, $this->activeLinkOptions);
         }
 
-        return $this->render('menu-item', [
-            'menu' => $this->menu,
-            'options' => $options,
-            'linkOptions' => $linkOptions,
-            'url' => $this->url,
-            'label' => $this->label,
-            'tag' => $this->tag,
-            'active' => $this->active,
-            'activeTag' => $this->activeTag
-        ]);
+        if ($this->active)
+        {
+            $content = Html::tag($this->linkTag, $this->label, $linkOptions);
+        }
+        else
+        {
+            $content = Html::tag($this->activeLinkTag, $this->label, $linkOptions);
+        }
+
+        return Html::tag($this->tag, $this->content, $options);
     }
 
 }

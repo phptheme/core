@@ -15,11 +15,19 @@ class MenuItem extends \PHPTheme\Core\Widget
 
     public $options = [];
 
+    public $defaultOptions = [];
+
     public $activeOptions = [];
 
     public $linkOptions = [];
 
+    public $defaultLinkOptions = [];
+
     public $activeLinkOptions = [];
+
+    public $linkTag = 'a';
+
+    public $activeLinkTag = 'a';
 
     public $url;
 
@@ -31,32 +39,65 @@ class MenuItem extends \PHPTheme\Core\Widget
 
     public $active;
 
-    public function run()
-    {
-        $options = $this->options;
+    public $icon;
 
-        if ($this->active)
+    public $iconTemplate = '<i class="{icon}"></i>{label}';
+
+    protected function renderLabel()
+    {
+        $return = $this->label;
+
+        if ($this->icon)
         {
-            $options = Html::mergeOptions($options, $this->activeOptions);
+            $return = strtr($this->iconTemplate, [
+                '{label}' => $this->label,
+                '{icon}' => $this->icon
+            ]);
         }
 
-        $linkOptions = $this->linkOptions;
+        return $return;
+    }
+
+    protected function renderLink()
+    {
+        $linkOptions = Html::mergeOptions($this->defaultLinkOptions, $this->linkOptions);
 
         if ($this->active)
         {
             $linkOptions = Html::mergeOptions($linkOptions, $this->activeLinkOptions);
         }
 
+        $label = $this->renderLabel();
+
         if ($this->active)
         {
-            $content = Html::tag($this->linkTag, $this->label, $linkOptions);
+            $tag = $this->activeLinkTag;
         }
         else
         {
-            $content = Html::tag($this->activeLinkTag, $this->label, $linkOptions);
+            $tag = $this->linkTag;
         }
 
-        return Html::tag($this->tag, $this->content, $options);
+        if ($this->url && ($tag == 'a'))
+        {
+            $linkOptions['href'] = $this->url;
+        }
+
+        return Html::tag($tag, $label, $linkOptions);
+    }
+
+    public function run()
+    {
+        $options = Html::mergeOptions($this->defaultOptions, $this->options);
+
+        if ($this->active)
+        {
+            $options = Html::mergeOptions($options, $this->activeOptions);
+        }
+
+        $content = $this->renderLink();
+
+        return Html::tag($this->tag, $content, $options);
     }
 
 }

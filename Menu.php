@@ -6,7 +6,7 @@
  */
 namespace PHPTheme\Core;
 
-use PHPTheme\Core\Html;
+use PhpTheme\Core\Html;
 
 class Menu extends \PHPTheme\Core\Widget
 {
@@ -21,59 +21,15 @@ class Menu extends \PHPTheme\Core\Widget
 
     public $tag;
 
-    public $itemTag;
-
-    public $activeItemTag;
-
-    public $itemOptions = [];
-
-    public $defaultItemOptions = [];
-
-    public $itemLinkOptions = [];
-
-    public $defaultItemLinkOptions = [];
+    public $defaultItem = [];
 
     protected function createItem(array $params = [])
     {
+        $params = Html::mergeOptions($this->defaultItem, $params);
+
         $params['menu'] = $this;
 
-        if (!array_key_exists('tag', $params))
-        {
-            $params['tag'] = $this->itemTag;
-        }
-
-        if (!array_key_exists('activeTag', $params))
-        {
-            $params['activeTag'] = $this->activeItemTag;
-        }
-
-        $options = Html::mergeOptions($this->defaultItemOptions, $this->itemOptions);
-
-        if (array_key_exists('options', $params))
-        {
-            $params['options'] = Html::mergeOptions($options, $params['options']);
-        }
-        else
-        {
-            $params['options'] = $options;
-        }
-
-        $linkOptions = Html::mergeOptions($this->defaultItemLinkOptions, $this->itemLinkOptions);
-
-        if (array_key_exists('linkOptions', $params))
-        {
-            $params['linkOptions'] = Html::mergeOptions($linkOptions, $params['linkOptions']);
-        }
-        else
-        {
-            $params['linkOptions'] = $linkOptions;
-        }
-
-        $theme = $this->theme;        
-
-        $item = $theme->createWidget(static::MENU_ITEM, $params);
-
-        return $item;
+        return $this->theme->createWidget(static::MENU_ITEM, $params);
     }
 
     public function run()

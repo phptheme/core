@@ -11,7 +11,7 @@ use PHPTheme\Core\Html;
 class MenuItem extends \PHPTheme\Core\Widget
 {
 
-    public $menu;
+    const SUBMENU = Menu::class;
 
     public $options = [];
 
@@ -42,6 +42,12 @@ class MenuItem extends \PHPTheme\Core\Widget
     public $icon;
 
     public $iconTemplate = '<i class="{icon}"></i>{label}';
+
+    public $defaultSubmenu = [];
+
+    public $submenu = [];
+
+    public $items = [];
 
     protected function renderLabel()
     {
@@ -97,7 +103,27 @@ class MenuItem extends \PHPTheme\Core\Widget
 
         $content = $this->renderLink();
 
+        $content .= $this->renderSubmenu();
+
         return Html::tag($this->tag, $content, $options);
+    }
+
+    protected function renderSubmenu()
+    {
+        if (!$this->items)
+        {
+            return '';
+        }
+
+        $options = Html::mergeOptions(
+            $this->defaultSubmenu, 
+            $this->submenu,
+            [
+                'items' => $this->items
+            ]
+        );
+        
+        return $this->theme->widget(static::SUBMENU, $options);
     }
 
 }

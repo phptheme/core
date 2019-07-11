@@ -4,9 +4,9 @@
  * @link http://getphptheme.com
  * @license MIT License
  */
-namespace PHPTheme\Core;
+namespace PhpTheme\Core;
 
-use PHPTheme\Core\Html;
+use PhpTheme\Core\Html;
 
 class MenuItem extends \PHPTheme\Core\Widget
 {

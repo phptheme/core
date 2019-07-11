@@ -13,6 +13,14 @@ abstract class BaseTheme
 
     use RenderFileTrait;
 
+    const TABLE = Table::class;
+
+    const FORM = Form::class;
+
+    public $defaultTable = [];
+
+    public $defaultForm = [];
+
     public $baseUrl = '';
 
     public function escape($string, $encoding = 'utf-8', $specialCharsFlags = null)
@@ -35,6 +43,20 @@ abstract class BaseTheme
         $widget = $this->createWidget($class, $params);
         
         return $widget->run();
+    }
+
+    public function table($table)
+    {
+        $table = Html::mergeOptions($this->defaultTable, $table);
+
+        return $this->widget(static::TABLE, $table);
+    }
+
+    public function form($form)
+    {
+        $form = Html::mergeOptions($this->defaultForm, $form);
+
+        return $this->widget(static::FORM, $form);
     }
 
     public function createWidget(string $class, array $params = [])

@@ -17,11 +17,11 @@ abstract class BaseTheme
 
     const FORM = Form::class;
 
+    public $baseUrl = '';
+
     public $defaultTable = [];
 
     public $defaultForm = [];
-
-    public $baseUrl = '';
 
     public function escape($string, $encoding = 'utf-8', $specialCharsFlags = null)
     {
@@ -45,18 +45,18 @@ abstract class BaseTheme
         return $widget->run();
     }
 
-    public function table($table)
+    public function createTable($table)
     {
         $table = Html::mergeOptions($this->defaultTable, $table);
 
-        return $this->widget(static::TABLE, $table);
+        return $this->createWidget(static::TABLE, $table);
     }
 
-    public function form($form)
+    public function createForm($form)
     {
         $form = Html::mergeOptions($this->defaultForm, $form);
 
-        return $this->widget(static::FORM, $form);
+        return $this->createWidget(static::FORM, $form);
     }
 
     public function createWidget(string $class, array $params = [])

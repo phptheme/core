@@ -19,12 +19,7 @@ class TableRow extends Widget
 
     public $defaultOptions = [];
 
-    public $defaultColumn = [
-        //'header' => null,
-        //'content' => null,
-        //'footer' => null,
-        //'attribute' => null
-    ];
+    public $defaultColumn = [];
 
     protected function renderColumn($column)
     {
@@ -50,6 +45,15 @@ class TableRow extends Widget
 
         foreach($this->columns as $column)
         {
+            if (is_object($column))
+            {
+                $column->data = $this->data;
+
+                $content .= $column->run();
+
+                continue;
+            }
+
             $content .= $this->renderColumn($column);
         }
 

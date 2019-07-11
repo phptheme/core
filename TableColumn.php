@@ -14,9 +14,41 @@ class TableColumn extends Widget
 
     public $defaultOptions = [];
 
-    public $attribute;
+    /*
 
-    public $data = [];
+    // header
+
+    public $headerTag = 'th';
+
+    public $header = null;
+
+    public $headerOptions = [];
+
+    public $defaultHeaderOptions = [];
+
+    // footer
+
+    public $footerTag = 'td';
+
+    public $footer = null;
+
+    public $footerOptions = [];
+
+    public $defaultOptionsFooter = [];
+
+    */
+
+    public $header = null;
+
+    public $defaultHeaderOptions = [];
+
+    public $headerOptions = [];
+
+    public $footer = null;
+
+    public $defaultFooterOptions = [];
+
+    public $footerOptions = [];
 
     protected function renderContent()
     {
@@ -32,11 +64,11 @@ class TableColumn extends Widget
             return $content;
         }
 
-        if ($this->attribute && $this->data && array_key_exists($this->attribute, $this->data))
-        {
-            return $this->data[$this->attribute];
-        }
+        return $this->renderDefaultContent();
+    }
 
+    protected function renderDefaultContent()
+    {
         return '';
     }
 
@@ -46,7 +78,17 @@ class TableColumn extends Widget
 
         $options = Html::mergeOptions($this->defaultOptions, $this->options);
 
-        return Html::tag($this->tag, $content, $options);
+        return Html::tag($this->tag, $content, $options);  
+    }
+
+    public function getHeaderOptions()
+    {
+        return Html::mergeOptions($this->defaultHeaderOptions, $this->headerOptions);
+    }
+
+    public function getFooterOptions()
+    {
+        return Html::mergeOptions($this->defaultFooterOptions, $this->footerOptions);
     }
 
 }

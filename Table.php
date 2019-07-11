@@ -17,6 +17,8 @@ class Table extends Widget
 
     const ATTRIBUTE_COLUMN = TableAttributeColumn::class;
 
+    public $rows = [];
+
     public $columns = [];
 
     public $options = [];
@@ -48,34 +50,26 @@ class Table extends Widget
 
     protected function renderHeader()
     {
-        $options = Html::mergeOptions($this->defaultHeader, $this->header);
-
-        if (empty($options['columns']))
-        {
-            foreach($this->columns as $i => $column)
-            {
-                $options['columns'][$i] = $column->getHeaderOptions();
-
-                $options['columns'][$i]['content'] = $column->header;
-            }
-        }
+        $options = Html::mergeOptions(
+            $this->defaultHeader, 
+            $this->header,
+            [
+                'columns' => $this->columns
+            ]
+        );
 
         return $this->theme->widget(static::HEADER, $options);
     }
 
     protected function renderFooter()
     {
-        $options = Html::mergeOptions($this->defaultFooter, $this->footer); 
-
-        if (empty($options['columns']))
-        {
-            foreach($this->columns as $i => $column)
-            {
-                $options['columns'][$i] = $column->getFooterOptions();
-                
-                $options['columns'][$i]['content'] = $column->footer;
-            }
-        }
+        $options = Html::mergeOptions(
+            $this->defaultFooter, 
+            $this->footer,
+            [
+                'columns' => $this->columns
+            ]
+        ); 
 
         return $this->theme->widget(static::FOOTER, $options);
     }

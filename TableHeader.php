@@ -7,50 +7,47 @@ use PhpTheme\Core\Html;
 class TableHeader extends \PhpTheme\Core\Widget
 {
 
-    const ROW = TableRow::class;
+    const ROW = Tag::class;
 
     public $tag = 'thead';
 
     public $columns = [];
 
-    public $defaultRow = [];
+    public $defaultRow = ['tag' => 'tr'];
 
     public $options = [];
 
     public $defaultOptions = [];    
 
-    protected function renderRow()
+    protected function renderRow($content)
     {
-        $options = Html::mergeOptions($this->defaultRow, [
-            'columns' => $this->columns,
-            'defaultColumn' => [
-                'tag' => 'th'
-            ]
-        ]);
+        $options = Html::mergeOptions($this->defaultRow, ['content' => $content]);
 
         return $this->theme->widget(static::ROW, $options);
     }
 
     public function run()
     {
+        $content = '';
+
         $empty = true;
 
         foreach($this->columns as $column)
         {
-            if ($column)
+            if ($column->header)
             {
                 $empty = false;
-
-                break;
             }
+
+            $content .= $column->renderHeader();
         }
 
         if ($empty)
         {
             return '';
-        }
+        }        
 
-        $content = $this->renderRow();
+        $content = $this->renderRow($content);
 
         $options = Html::mergeOptions($this->defaultOptions, $this->options);
 

@@ -9,9 +9,9 @@ class TableAttributeColumn extends TableColumn
 
     protected function renderContent()
     {
-        if ($this->attribute && $this->data && array_key_exists($this->attribute, $this->data))
+        if ($this->attribute && $this->row && array_key_exists($this->attribute, $this->row))
         {
-            return $this->data[$this->attribute];
+            return $this->row[$this->attribute];
         }
 
         return $this->renderDefaultContent();

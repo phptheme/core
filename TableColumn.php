@@ -8,43 +8,25 @@ use Closure;
 class TableColumn extends Widget
 {
 
+    public $row = [];
+
     public $tag = 'td';
 
     public $options = [];
 
     public $defaultOptions = [];
 
-    /*
+    public $header = null;
 
-    // header
+    public $defaultHeaderOptions = [];
 
     public $headerTag = 'th';
 
-    public $header = null;
-
     public $headerOptions = [];
 
-    public $defaultHeaderOptions = [];
-
-    // footer
+    public $footer = null;
 
     public $footerTag = 'td';
-
-    public $footer = null;
-
-    public $footerOptions = [];
-
-    public $defaultOptionsFooter = [];
-
-    */
-
-    public $header = null;
-
-    public $defaultHeaderOptions = [];
-
-    public $headerOptions = [];
-
-    public $footer = null;
 
     public $defaultFooterOptions = [];
 
@@ -78,17 +60,21 @@ class TableColumn extends Widget
 
         $options = Html::mergeOptions($this->defaultOptions, $this->options);
 
-        return Html::tag($this->tag, $content, $options);  
+        return Html::tag($this->tag, $content, $options);
     }
 
-    public function getHeaderOptions()
+    public function renderHeader()
     {
-        return Html::mergeOptions($this->defaultHeaderOptions, $this->headerOptions);
+        $options = Html::mergeOptions($this->defaultHeaderOptions, $this->headerOptions);
+    
+        return Html::tag($this->headerTag, $this->header, $options);
     }
 
-    public function getFooterOptions()
+    public function renderFooter()
     {
-        return Html::mergeOptions($this->defaultFooterOptions, $this->footerOptions);
+        $options = Html::mergeOptions($this->defaultFooterOptions, $this->footerOptions);
+    
+        return Html::tag($this->footerTag, $this->footer, $options);
     }
 
 }

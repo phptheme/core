@@ -7,7 +7,7 @@ use PhpTheme\Core\Html;
 class TableBody extends Widget
 {
 
-    const ROW = TableRow::class;
+    const ROW = Tag::class;
 
     public $rows = [];
 
@@ -19,15 +19,12 @@ class TableBody extends Widget
 
     public $columns = [];
 
-    public $defaultRow = [
-        'tag' => 'tr'
-    ];
+    public $defaultRow = ['tag' => 'tr'];
 
-    protected function renderRow($row)
+    protected function renderRow($content)
     {
         $options = Html::mergeOptions($this->defaultRow, [
-            'columns' => $this->columns,
-            'data' => $row
+            'content' => $content
         ]);
 
         return $this->theme->widget(static::ROW, $options);
@@ -39,7 +36,16 @@ class TableBody extends Widget
 
         foreach($this->rows as $row)
         {
-            $content .= $this->renderRow($row);
+            $rowContent = '';
+
+            foreach($this->columns as $column)
+            {
+                $column->row = $row;
+
+                $rowContent .= $column->run();
+            }
+
+            $content .= $this->renderRow($rowContent);
         }
 
         $options = Html::mergeOptions($this->defaultOptions, $this->options);

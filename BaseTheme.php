@@ -15,8 +15,6 @@ abstract class BaseTheme
 
     const TABLE = Table::class;
 
-    const FORM = Form::class;
-
     public $baseUrl = '';
 
     public $defaultTable = [];
@@ -50,13 +48,6 @@ abstract class BaseTheme
         $table = Html::mergeOptions($this->defaultTable, $table);
 
         return $this->createWidget(static::TABLE, $table);
-    }
-
-    public function createForm($form)
-    {
-        $form = Html::mergeOptions($this->defaultForm, $form);
-
-        return $this->createWidget(static::FORM, $form);
     }
 
     public function createWidget(string $class, array $params = [])

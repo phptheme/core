@@ -23,6 +23,8 @@ class Menu extends \PHPTheme\Core\Widget
 
     public $defaultItem = [];
 
+    public $renderEmpty = false;
+
     protected function createItem(array $params = [])
     {
         $params = Html::mergeOptions($this->defaultItem, $params);
@@ -70,6 +72,11 @@ class Menu extends \PHPTheme\Core\Widget
             $item = $this->prepareItem($item);
 
             $items[$key] = $this->createItem($item);
+        }
+
+        if (!$this->renderEmpty && !$items)
+        {
+            return '';
         }
 
         $content = '';

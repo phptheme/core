@@ -32,18 +32,37 @@ class TableColumn extends Widget
 
     public $footerOptions = [];
 
+    public $attribute;
+
+    protected function renderAttribute($attribute)
+    {
+        if (is_object($this->row))
+        {
+            return $this->row->{$attribute};
+        }
+        else
+        {
+            return $this->row[$attribute];
+        }        
+    }
+
     protected function renderContent()
     {
         $content = $this->content;
 
         if ($content instanceof Closure)
         {
-            return $content();
+            return $content($this->row);
         }
 
         if ($content !== null)
         {
             return $content;
+        }
+
+        if ($this->attribute)
+        {
+            return $this->renderAttribute($this->attribute);
         }
 
         return $this->renderDefaultContent();

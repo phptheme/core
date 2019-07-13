@@ -3,9 +3,12 @@
 namespace PhpTheme\Core;
 
 use PhpTheme\Core\Html;
+use Closure;
 
 class Table extends Widget
 {
+
+    const ROW = Tag::class;
 
     const HEADER = TableHeader::class;
 
@@ -15,9 +18,13 @@ class Table extends Widget
 
     const COLUMN = TableColumn::class;
 
-    const ATTRIBUTE_COLUMN = TableAttributeColumn::class;
+//    const ATTRIBUTE_COLUMN = TableAttributeColumn::class;
+
+    public $defaultRow = ['tag' => 'tr'];
 
     public $rows = [];
+
+    public $emptyRow;
 
     public $columns = [];
 
@@ -37,16 +44,41 @@ class Table extends Widget
 
     public $defaultBody = [];
 
-    public $defaultAttributeColumn = [];
+//    public $defaultAttributeColumn = [];
 
     public $defaultColumn = [];
 
-    public function createAttributeColumn($options = [])
+    public function renderRow($content)
+    {
+        $options = Html::mergeOptions($this->defaultRow, ['content' => $content]);
+
+        return $this->theme->widget(static::ROW, $options);
+    }    
+
+    public function getRowColumns($row)
+    {
+        $columns = $this->columns;
+
+        if ($columns instanceof Closure)
+        {
+            $columns = $columns->bindTo($this);
+
+            $columns = $columns($row);
+        }
+
+        return $columns;
+    }
+
+    /*
+
+    public function attributeColumn($options = [])
     {
         $options = Html::mergeOptions($this->defaultAttributeColumn, $options);
 
         return $this->theme->createWidget(static::ATTRIBUTE_COLUMN, $options);
-    }    
+    }
+
+    */
 
     protected function renderHeader()
     {
@@ -54,7 +86,7 @@ class Table extends Widget
             $this->defaultHeader, 
             $this->header,
             [
-                'columns' => $this->columns
+                'table' => $this
             ]
         );
 
@@ -67,7 +99,7 @@ class Table extends Widget
             $this->defaultFooter, 
             $this->footer,
             [
-                'columns' => $this->columns
+                'table' => $this
             ]
         ); 
 
@@ -80,8 +112,7 @@ class Table extends Widget
             $this->defaultBody, 
             $this->body, 
             [
-                'columns' => $this->columns,
-                'rows' => $this->rows
+                'table' => $this
             ]
         );
 
@@ -128,14 +159,11 @@ class Table extends Widget
     {
         $this->prepareColumns();
 
-        return Html::tag(
-            'table', 
-            $this->renderHeader() . $this->renderBody() . $this->renderFooter(), 
-            Html::mergeOptions(
-                $this->defaultOptions, 
-                $this->options
-            )
-        );
-    }    
+        $content = $this->renderHeader() . $this->renderBody() . $this->renderFooter();
+
+        $options = Html::mergeOptions($this->defaultOptions, $this->options);
+
+        return Html::tag('table', $content, $options);
+    }
 
 }

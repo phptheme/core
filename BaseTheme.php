@@ -43,11 +43,18 @@ abstract class BaseTheme
         return $widget->run();
     }
 
-    public function createTable($table)
+    public function createTable(array $options = [])
     {
-        $table = Html::mergeOptions($this->defaultTable, $table);
+        $options = Html::mergeOptions($this->defaultTable, $options);
 
-        return $this->createWidget(static::TABLE, $table);
+        return $this->createWidget(static::TABLE, $options);
+    }
+
+    public function table(array $options = [])
+    {
+        $table = $this->createTable($options);
+
+        return $table->run();
     }
 
     public function createWidget(string $class, array $params = [])

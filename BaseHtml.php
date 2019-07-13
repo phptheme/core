@@ -42,6 +42,29 @@ abstract class BaseHtml
         return $class2;
     }
 
+    public static function mergeStyle($style1, $style2)
+    {
+        if (is_array($style2))
+        {
+            if (!is_array($style1))
+            {
+                $style1 = explode(';', $style1);
+            }
+
+            foreach($style2 as $style)
+            {
+                if (array_search($style, $style1) === false)
+                {
+                    $style1[] = $style;
+                }
+            }
+
+            return $style1;
+        }
+
+        return $style2;
+    }    
+
     public static function mergeOptions(array $array1, array $array2)
     {
         $args = func_get_args();
@@ -63,6 +86,10 @@ abstract class BaseHtml
             if (($key == 'class') && array_key_exists($key, $return))
             {
                 $return[$key] = static::mergeClass($return[$key], $value);
+            }
+            elseif(($key == 'style') && array_key_exists($key, $return))
+            {
+                $return[$key] = static::mergeStyle($return[$key], $value);
             }
             else
             {

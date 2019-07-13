@@ -7,24 +7,13 @@ use PhpTheme\Core\Html;
 class TableFooter extends \PhpTheme\Core\Widget
 {
 
-    const ROW = Tag::class;
+    public $table; // parent table
 
     public $tag = 'tfoot';
-
-    public $columns = [];
-
-    public $defaultRow = ['tag' => 'tr'];
 
     public $options = [];
 
     public $defaultOptions = [];
-
-    protected function renderRow($content)
-    {
-        $options = Html::mergeOptions($this->defaultRow, ['content' => $content]);
-
-        return $this->theme->widget(static::ROW, $options);
-    }
 
     public function run()
     {
@@ -32,7 +21,7 @@ class TableFooter extends \PhpTheme\Core\Widget
 
         $empty = true;
 
-        foreach($this->columns as $column)
+        foreach($this->table->getRowColumns($this->table->emptyRow) as $column)
         {
             if ($column->footer)
             {
@@ -47,7 +36,7 @@ class TableFooter extends \PhpTheme\Core\Widget
             return '';
         }
 
-        $content = $this->renderRow($content);
+        $content = $this->table->renderRow($content);
 
         $options = Html::mergeOptions($this->defaultOptions, $this->options);
 

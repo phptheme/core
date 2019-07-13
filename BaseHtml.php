@@ -42,24 +42,49 @@ abstract class BaseHtml
         return $class2;
     }
 
+    public static function explodeStyle(string $style)
+    {
+        $return = [];
+
+        $strings = explode(';', $style);
+
+        foreach($strings as $string)
+        {
+            list($key, $value) = explode(':', $string);
+
+            $return[$key] = $value;
+        }
+
+        return $return;
+    }
+
+    public static function implodeStyle(array $style)
+    {
+        $strings = [];
+
+        foreach($style as $key => $value)
+        {
+            $strings[] = $key . ':' . $value;
+        }
+
+        return implode(';', $strings);
+    }
+
     public static function mergeStyle($style1, $style2)
     {
         if (is_array($style2))
         {
             if (!is_array($style1))
             {
-                $style1 = explode(';', $style1);
+                $style1 = static::explodeStyle($style1);
             }
 
-            foreach($style2 as $style)
+            foreach($style2 as $key => $value)
             {
-                if (array_search($style, $style1) === false)
-                {
-                    $style1[] = $style;
-                }
+                $style1[$key] = $value;
             }
 
-            return $style1;
+            return static::implodeStyle($style1);
         }
 
         return $style2;
@@ -104,12 +129,14 @@ abstract class BaseHtml
     {
         $return = '';
 
-        if (array_key_exists('class', $options))
+        if (array_key_exists('class', $options) && is_array($options['class']))
         {
-            if (is_array($options['class']))
-            {
-                $options['class'] = implode(' ', $options['class']);
-            }
+            $options['class'] = implode(' ', $options['class']);
+        }
+
+        if (array_key_exists('style', $options) && is_array($options['style']))
+        {
+            $options['style'] = static::implodeStyle($options['style']);
         }
 
         foreach($options as $key => $value)

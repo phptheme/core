@@ -6,6 +6,8 @@
  */
 namespace PhpTheme\Core;
 
+use PhpTheme\Helpers\Html;
+
 abstract class BaseTheme extends View
 {
 

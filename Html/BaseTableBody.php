@@ -8,7 +8,7 @@ namespace PhpTheme\Html;
 
 use PhpTheme\Helpers\Html;
 
-class TableBody extends \PhpTheme\Core\Widget
+abstract class BaseTableBody extends \PhpTheme\Core\Widget
 {
 
     public $table; // parent table

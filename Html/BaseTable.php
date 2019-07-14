@@ -9,7 +9,7 @@ namespace PhpTheme\Html;
 use PhpTheme\Helpers\Html;
 use Closure;
 
-class Table extends \PhpTheme\Core\Widget
+abstract class BaseTable extends \PhpTheme\Core\Widget
 {
 
     const ROW = Tag::class;

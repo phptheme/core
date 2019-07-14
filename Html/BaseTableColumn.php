@@ -9,7 +9,7 @@ namespace PhpTheme\Html;
 use PhpTheme\Helpers\Html;
 use Closure;
 
-class TableColumn extends \PhpTheme\Core\Widget
+abstract class BaseTableColumn extends \PhpTheme\Core\Widget
 {
 
     public $row = [];

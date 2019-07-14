@@ -8,7 +8,7 @@ namespace PhpTheme\Html;
 
 use PhpTheme\Helpers\Html;
 
-class TableFooter extends \PhpTheme\Core\Widget
+abstract class BaseTableFooter extends \PhpTheme\Core\Widget
 {
 
     public $table; // parent table

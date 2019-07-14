@@ -8,7 +8,7 @@ namespace PhpTheme\Html;
 
 use PhpTheme\Helpers\Html;
 
-class MenuItem extends \PHPTheme\Core\Widget
+abstract class BaseMenuItem extends \PHPTheme\Core\Widget
 {
 
     const SUBMENU = Menu::class;

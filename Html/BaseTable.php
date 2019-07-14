@@ -12,17 +12,15 @@ use Closure;
 abstract class BaseTable extends \PhpTheme\Core\Widget
 {
 
-    const ROW = Tag::class;
+    const TABLE_ROW = Tag::class;
 
-    const HEADER = TableHeader::class;
+    const TABLE_HEADER = TableHeader::class;
 
-    const FOOTER = TableFooter::class;
+    const TABLE_FOOTER = TableFooter::class;
 
-    const BODY = TableBody::class;
+    const TABLE_BODY = TableBody::class;
 
-    const COLUMN = TableColumn::class;
-
-//    const ATTRIBUTE_COLUMN = TableAttributeColumn::class;
+    const TABLE_COLUMN = TableColumn::class;
 
     public $defaultRow = ['tag' => 'tr'];
 
@@ -48,15 +46,13 @@ abstract class BaseTable extends \PhpTheme\Core\Widget
 
     public $defaultBody = [];
 
-//    public $defaultAttributeColumn = [];
-
     public $defaultColumn = [];
 
     public function renderRow($content)
     {
         $options = Html::mergeOptions($this->defaultRow, ['content' => $content]);
 
-        return $this->theme->widget(static::ROW, $options);
+        return $this->theme->widget(static::TABLE_ROW, $options);
     }    
 
     public function getRowColumns($row)
@@ -73,17 +69,6 @@ abstract class BaseTable extends \PhpTheme\Core\Widget
         return $columns;
     }
 
-    /*
-
-    public function attributeColumn($options = [])
-    {
-        $options = Html::mergeOptions($this->defaultAttributeColumn, $options);
-
-        return $this->theme->createWidget(static::ATTRIBUTE_COLUMN, $options);
-    }
-
-    */
-
     protected function renderHeader()
     {
         $options = Html::mergeOptions(
@@ -94,7 +79,7 @@ abstract class BaseTable extends \PhpTheme\Core\Widget
             ]
         );
 
-        return $this->theme->widget(static::HEADER, $options);
+        return $this->theme->widget(static::TABLE_HEADER, $options);
     }
 
     protected function renderFooter()
@@ -107,7 +92,7 @@ abstract class BaseTable extends \PhpTheme\Core\Widget
             ]
         ); 
 
-        return $this->theme->widget(static::FOOTER, $options);
+        return $this->theme->widget(static::TABLE_FOOTER, $options);
     }
 
     protected function renderBody()
@@ -120,7 +105,7 @@ abstract class BaseTable extends \PhpTheme\Core\Widget
             ]
         );
 
-        return $this->theme->widget(static::BODY, $options);
+        return $this->theme->widget(static::TABLE_BODY, $options);
     }
 
     public function createColumn($options = [])
@@ -135,7 +120,7 @@ abstract class BaseTable extends \PhpTheme\Core\Widget
         }
         else
         {
-            $class = static::COLUMN;
+            $class = static::TABLE_COLUMN;
         }
 
         return $this->theme->createWidget($class, $options);

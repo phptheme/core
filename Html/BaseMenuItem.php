@@ -1,12 +1,12 @@
 <?php
 /**
- * @copyright Copyright (c) 2018-2019 getphptheme.com
+ * @copyright Copyright (c) 2018-2019 PhpTheme Dev Team
  * @link http://getphptheme.com
  * @license MIT License
  */
-namespace PhpTheme\Core;
+namespace PhpTheme\Html;
 
-use PhpTheme\Core\Html;
+use PhpTheme\Helpers\Html;
 
 class MenuItem extends \PHPTheme\Core\Widget
 {

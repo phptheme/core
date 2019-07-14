@@ -1,10 +1,10 @@
 <?php
 /**
- * @copyright Copyright (c) 2018-2019 getphptheme.com
+ * @copyright Copyright (c) 2018-2019 PhpTheme Dev Team
  * @link http://getphptheme.com
  * @license MIT License
  */
-namespace PhpTheme\Core;
+namespace PhpTheme\Helpers;
 
 abstract class BaseHtml
 {

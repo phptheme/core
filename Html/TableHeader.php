@@ -4,11 +4,8 @@
  * @link http://getphptheme.com
  * @license MIT License
  */
-namespace PhpTheme\Core;
+namespace PhpTheme\Html;
 
-abstract class Widget extends BaseWidget
+class TableHeader extends BaseTableHeader
 {
-
-    abstract function run();
-
 }

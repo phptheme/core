@@ -3,10 +3,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-			"PhpTheme\\Core\\" : ""
+			"PhpTheme\\Core\\" : "",
+			"PhpTheme\\Helpers\\" : "Helpers/",
+			"PhpTheme\\Html\\" : "Html/"
         }
     },
     "require": {
-        "phptheme/view": "dev-master"
+        "composer-plugin-api": "^1.0"
     }
 }

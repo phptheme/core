@@ -1,17 +1,13 @@
 <?php
 /**
- * @copyright Copyright (c) 2018-2019 getphptheme.com
+ * @copyright Copyright (c) 2018-2019 PhpTheme Dev Team
  * @link http://getphptheme.com
  * @license MIT License
  */
 namespace PhpTheme\Core;
 
-use PhpTheme\View\RenderFileTrait;
-
-abstract class BaseTheme
+abstract class BaseTheme extends View
 {
-
-    use RenderFileTrait;
 
     const TABLE = Table::class;
 

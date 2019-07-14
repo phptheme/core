@@ -1,10 +1,14 @@
 <?php
+/**
+ * @copyright Copyright (c) 2018-2019 PhpTheme Dev Team
+ * @link http://getphptheme.com
+ * @license MIT License
+ */
+namespace PhpTheme\Html;
 
-namespace PhpTheme\Core;
+use PhpTheme\Helpers\Html;
 
-use PhpTheme\Core\Html;
-
-class TableBody extends Widget
+class TableBody extends \PhpTheme\Core\Widget
 {
 
     public $table; // parent table

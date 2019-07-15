@@ -19,6 +19,12 @@ abstract class BaseTheme extends View
 
     public $defaultForm = [];
 
+    public $head = '';
+
+    public $beginBody = '';
+
+    public $endBody = '';
+
     public function escape($string, $encoding = 'utf-8', $specialCharsFlags = null)
     {
         return Html::escape($string, $encoding, $specialCharsFlags);

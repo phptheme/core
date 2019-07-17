@@ -55,7 +55,7 @@ abstract class BaseTable extends \PhpTheme\Core\Widget
         return $this->theme->widget(static::TABLE_ROW, $options);
     }    
 
-    public function getRowColumns($row)
+    public function rowColumns($row)
     {
         $columns = $this->columns;
 

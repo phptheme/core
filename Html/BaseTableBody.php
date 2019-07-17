@@ -27,7 +27,7 @@ abstract class BaseTableBody extends \PhpTheme\Core\Widget
         {
             $rowContent = '';
 
-            foreach($this->table->getRowColumns($row) as $column)
+            foreach($this->table->rowColumns($row) as $column)
             {
                 $column->row = $row;
 

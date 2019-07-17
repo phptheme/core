@@ -38,16 +38,23 @@ abstract class BaseTableColumn extends \PhpTheme\Core\Widget
 
     public $attribute;
 
-    protected function renderAttribute($attribute)
+    protected function getAttributeValue()
     {
         if (is_object($this->row))
         {
-            return $this->row->{$attribute};
+            return $this->row->{$this->attribute};
         }
         else
         {
-            return $this->row[$attribute];
+            return $this->row[$this->attribute];
         }        
+    }
+
+    protected function renderAttribute($attribute)
+    {
+        $return = $this->getAttributeValue();
+
+        return $return;
     }
 
     protected function renderContent()

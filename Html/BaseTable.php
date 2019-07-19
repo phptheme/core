@@ -26,8 +26,6 @@ abstract class BaseTable extends \PhpTheme\Core\Widget
 
     public $rows = [];
 
-    public $emptyRow;
-
     public $columns = [];
 
     public $options = [];

@@ -40,6 +40,13 @@ abstract class BaseTableColumn extends \PhpTheme\Core\Widget
 
     public $renderContent;
 
+    public function setRenderContent($renderContent)
+    {
+        $renderContent = $renderContent->bindTo($this);
+
+        $this->renderContent = $renderContent;
+    }
+
     protected function getAttributeValue()
     {
         if (is_object($this->row))

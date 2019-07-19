@@ -7,6 +7,7 @@
 namespace PhpTheme\Core;
 
 use PhpTheme\Helpers\Html;
+use PhpTheme\Html\Table;
 
 abstract class BaseTheme extends View
 {

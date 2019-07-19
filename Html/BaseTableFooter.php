@@ -25,7 +25,7 @@ abstract class BaseTableFooter extends \PhpTheme\Core\Widget
 
         $empty = true;
 
-        foreach($this->table->rowColumns(null) as $column)
+        foreach($this->table->rowColumns($this->table->defaultRow) as $column)
         {
             if ($column->footer)
             {

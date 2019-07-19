@@ -22,7 +22,9 @@ abstract class BaseTable extends \PhpTheme\Core\Widget
 
     protected $tableColumnClass = TableColumn::class;
 
-    public $defaultRow = ['tag' => 'tr'];
+    public $defaultRow;
+
+    public $defaultRowOptions = ['tag' => 'tr'];
 
     public $rows = [];
 
@@ -34,21 +36,21 @@ abstract class BaseTable extends \PhpTheme\Core\Widget
 
     public $header = [];
 
-    public $defaultHeader = [];
+    public $defaultHeaderOptions = [];
 
     public $footer = [];
 
-    public $defaultFooter = [];
+    public $defaultFooterOptions = [];
 
     public $body = [];
 
-    public $defaultBody = [];
+    public $defaultBodyOptions = [];
 
-    public $defaultColumn = [];
+    public $defaultColumnOptions = [];
 
     public function renderRow($content)
     {
-        $options = Html::mergeOptions($this->defaultRow, ['content' => $content]);
+        $options = Html::mergeOptions($this->defaultRowOptions, ['content' => $content]);
 
         return $this->theme->widget($this->tableRowClass, $options);
     }
@@ -70,7 +72,7 @@ abstract class BaseTable extends \PhpTheme\Core\Widget
     protected function renderHeader()
     {
         $options = Html::mergeOptions(
-            $this->defaultHeader, 
+            $this->defaultHeaderOptions, 
             $this->header,
             [
                 'table' => $this
@@ -83,7 +85,7 @@ abstract class BaseTable extends \PhpTheme\Core\Widget
     protected function renderFooter()
     {
         $options = Html::mergeOptions(
-            $this->defaultFooter, 
+            $this->defaultFooterOptions, 
             $this->footer,
             [
                 'table' => $this
@@ -96,7 +98,7 @@ abstract class BaseTable extends \PhpTheme\Core\Widget
     protected function renderBody()
     {
         $options = Html::mergeOptions(
-            $this->defaultBody, 
+            $this->defaultBodyOptions, 
             $this->body, 
             [
                 'table' => $this
@@ -108,7 +110,7 @@ abstract class BaseTable extends \PhpTheme\Core\Widget
 
     public function createColumn($options = [])
     {
-        $options = Html::mergeOptions($this->defaultColumn, $options);
+        $options = Html::mergeOptions($this->defaultColumnOptions, $options);
 
         if (array_key_exists('class', $options))
         {

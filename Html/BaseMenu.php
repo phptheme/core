@@ -11,7 +11,7 @@ use PhpTheme\Helpers\Html;
 abstract class BaseMenu extends \PhpTheme\Core\Widget
 {
 
-    const MENU_ITEM = MenuItem::class;
+    protected $menuItemClass = MenuItem::class;
 
     public $items = [];
 
@@ -29,7 +29,7 @@ abstract class BaseMenu extends \PhpTheme\Core\Widget
     {
         $params = Html::mergeOptions($this->defaultItem, $params);
 
-        return $this->theme->createWidget(static::MENU_ITEM, $params);
+        return $this->theme->createWidget($this->menuItemClass, $params);
     }
 
     protected function itemIsActive($item)

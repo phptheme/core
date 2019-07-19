@@ -12,15 +12,15 @@ use Closure;
 abstract class BaseTable extends \PhpTheme\Core\Widget
 {
 
-    const TABLE_ROW = Tag::class;
+    protected $tableRowClass = Tag::class;
 
-    const TABLE_HEADER = TableHeader::class;
+    protected $tableHeaderClass = TableHeader::class;
 
-    const TABLE_FOOTER = TableFooter::class;
+    protected $tableFooterClass = TableFooter::class;
 
-    const TABLE_BODY = TableBody::class;
+    protected $tableBodyClass = TableBody::class;
 
-    const TABLE_COLUMN = TableColumn::class;
+    protected $tableColumnClass = TableColumn::class;
 
     public $defaultRow = ['tag' => 'tr'];
 
@@ -50,8 +50,8 @@ abstract class BaseTable extends \PhpTheme\Core\Widget
     {
         $options = Html::mergeOptions($this->defaultRow, ['content' => $content]);
 
-        return $this->theme->widget(static::TABLE_ROW, $options);
-    }    
+        return $this->theme->widget($this->tableRowClass, $options);
+    }
 
     public function rowColumns($row)
     {
@@ -77,7 +77,7 @@ abstract class BaseTable extends \PhpTheme\Core\Widget
             ]
         );
 
-        return $this->theme->widget(static::TABLE_HEADER, $options);
+        return $this->theme->widget($this->tableHeaderClass, $options);
     }
 
     protected function renderFooter()
@@ -90,7 +90,7 @@ abstract class BaseTable extends \PhpTheme\Core\Widget
             ]
         ); 
 
-        return $this->theme->widget(static::TABLE_FOOTER, $options);
+        return $this->theme->widget($this->tableFooterClass, $options);
     }
 
     protected function renderBody()
@@ -103,7 +103,7 @@ abstract class BaseTable extends \PhpTheme\Core\Widget
             ]
         );
 
-        return $this->theme->widget(static::TABLE_BODY, $options);
+        return $this->theme->widget($this->tableBodyClass, $options);
     }
 
     public function createColumn($options = [])
@@ -118,7 +118,7 @@ abstract class BaseTable extends \PhpTheme\Core\Widget
         }
         else
         {
-            $class = static::TABLE_COLUMN;
+            $class = $this->tableColumnClass;
         }
 
         return $this->theme->createWidget($class, $options);

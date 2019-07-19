@@ -11,7 +11,7 @@ use PhpTheme\Helpers\Html;
 abstract class BaseMenuItem extends \PHPTheme\Core\Widget
 {
 
-    const SUBMENU = Menu::class;
+    protected $submenuClass = Menu::class;
 
     public $options = [];
 
@@ -123,7 +123,7 @@ abstract class BaseMenuItem extends \PHPTheme\Core\Widget
             ]
         );
         
-        return $this->theme->widget(static::SUBMENU, $options);
+        return $this->theme->widget($this->submenuClass, $options);
     }
 
 }

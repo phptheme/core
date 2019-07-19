@@ -11,7 +11,7 @@ use PhpTheme\Helpers\Html;
 abstract class BaseTheme extends View
 {
 
-    const TABLE = Table::class;
+    protected $tableClass = Table::class;
 
     public $baseUrl = '';
 
@@ -51,7 +51,7 @@ abstract class BaseTheme extends View
     {
         $options = Html::mergeOptions($this->defaultTable, $options);
 
-        return $this->createWidget(static::TABLE, $options);
+        return $this->createWidget($this->tableClass, $options);
     }
 
     public function table(array $options = [])

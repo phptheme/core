@@ -38,6 +38,8 @@ abstract class BaseTableColumn extends \PhpTheme\Core\Widget
 
     public $attribute;
 
+    public $renderContent;
+
     protected function getAttributeValue()
     {
         if (is_object($this->row))
@@ -57,36 +59,38 @@ abstract class BaseTableColumn extends \PhpTheme\Core\Widget
         return $return;
     }
 
-    protected function renderContent()
-    {
-        $content = $this->content;
-
-        if ($content instanceof Closure)
-        {
-            return $content($this->row);
-        }
-
-        if ($content !== null)
-        {
-            return $content;
-        }
-
-        if ($this->attribute)
-        {
-            return $this->renderAttribute($this->attribute);
-        }
-
-        return $this->renderDefaultContent();
-    }
-
-    protected function renderDefaultContent()
-    {
-        return '';
-    }
-
     public function run()
     {
-        $content = $this->renderContent();
+        $renderContent = $this->renderContent;
+
+        if (!$renderContent)
+        {
+            $renderContent = function()
+            {
+                $content = $this->content;
+
+                if ($content instanceof Closure)
+                {
+                    return $content($this->row);
+                }
+
+                if ($content !== null)
+                {
+                    return $content;
+                }
+
+                if ($this->attribute)
+                {
+                    return $this->renderAttribute($this->attribute);
+                }
+
+                return '';
+            };
+        }
+
+        $renderContent->bindTo($this);
+
+        $content = $renderContent();
 
         $options = Html::mergeOptions($this->defaultOptions, $this->options);
 

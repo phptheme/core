@@ -20,7 +20,7 @@ abstract class BaseTableColumn extends \PhpTheme\Core\Widget
 
     public $defaultOptions = [];
 
-    public $header = null;
+    protected $header = null;
 
     public $defaultHeaderOptions = [];
 
@@ -28,7 +28,7 @@ abstract class BaseTableColumn extends \PhpTheme\Core\Widget
 
     public $headerOptions = [];
 
-    public $footer = null;
+    protected $footer = null;
 
     public $footerTag = 'td';
 
@@ -108,14 +108,24 @@ abstract class BaseTableColumn extends \PhpTheme\Core\Widget
     {
         $options = Html::mergeOptions($this->defaultHeaderOptions, $this->headerOptions);
     
-        return Html::tag($this->headerTag, $this->header, $options);
+        return Html::tag($this->headerTag, $this->getHeader(), $options);
     }
 
     public function renderFooter()
     {
         $options = Html::mergeOptions($this->defaultFooterOptions, $this->footerOptions);
     
-        return Html::tag($this->footerTag, $this->footer, $options);
+        return Html::tag($this->footerTag, $this->getFooter(), $options);
+    }
+
+    public function getHeader()
+    {
+        return $this->header;
+    }
+
+    public function getFooter()
+    {
+        return $this->footer;
     }
 
 }

@@ -27,7 +27,9 @@ abstract class BaseTableHeader extends \PhpTheme\Core\Widget
 
         foreach($this->table->rowColumns($this->table->defaultRow) as $column)
         {
-            if ($column->header)
+            $column->row = $this->table->defaultRow;
+
+            if ($column->getHeader())
             {
                 $empty = false;
             }

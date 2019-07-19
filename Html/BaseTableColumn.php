@@ -38,7 +38,7 @@ abstract class BaseTableColumn extends \PhpTheme\Core\Widget
 
     public $attribute;
 
-    public $renderContent;
+    protected $renderContent;
 
     public function setRenderContent($renderContent)
     {

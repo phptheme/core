@@ -142,6 +142,15 @@ abstract class BaseFileHelper
         // Simple copy for a file
         if (is_file($source))
         {
+            $dir = pathinfo($dest, PATHINFO_DIRNAME);
+
+            if (!$dir)
+            {
+                throw new Exception('Target directory error.');
+            }
+
+            static::createDirectory($dir);
+
             $result = copy($source, $dest);
 
             if (!$result)

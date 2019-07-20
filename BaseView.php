@@ -11,6 +11,10 @@ use Exception;
 abstract class BaseView
 {
 
+    public function __construct()
+    {
+    }
+
     public function renderFile($filename, array $params = [])
     {
         if (!is_file($filename))

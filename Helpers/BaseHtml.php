@@ -180,7 +180,23 @@ abstract class BaseHtml
 
     public static function shortTag($tag, array $options = [])
     {
-        return '<' . $tag . static::renderOptions($options) . ' />';
+        return '<' . $tag . static::renderOptions($options) . '>';
+    }
+
+    public static function linkCss($href, array $options = [])
+    {
+        $options['rel'] = 'stylesheet';
+
+        $options['type'] = 'text/css';
+
+        if (!array_key_exists('media', $options))
+        {
+            $options['media'] = 'screen';
+        }
+
+        $options['href'] = $href;
+
+        return static::shortTag('link', $options);
     }
 
 }

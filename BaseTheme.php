@@ -9,8 +9,10 @@ namespace PhpTheme\Core;
 use PhpTheme\Helpers\Html;
 use PhpTheme\Html\Table;
 
-abstract class BaseTheme extends View
+abstract class BaseTheme extends ThemeAbstract
 {
+
+    use RenderFileTrait;    
 
     protected $tableClass = Table::class;
 
@@ -25,6 +27,11 @@ abstract class BaseTheme extends View
     public $beginBody = '';
 
     public $endBody = '';
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     public function escape($string, $encoding = 'utf-8', $specialCharsFlags = null)
     {

@@ -6,12 +6,8 @@
  */
 namespace PhpTheme\Core;
 
-use Exception;
-
-abstract class BaseView
+abstract class ThemeAbstract
 {
-
-    use RenderFileTrait;
 
     public function __construct()
     {

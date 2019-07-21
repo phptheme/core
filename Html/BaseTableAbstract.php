@@ -6,7 +6,7 @@
  */
 namespace PhpTheme\Html;
 
-abstract class TableAbstract extends \PhpTheme\Core\Widget
+abstract class BaseTableAbstract extends \PhpTheme\Core\Widget
 {
 
     abstract public function run();

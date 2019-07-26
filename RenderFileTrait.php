@@ -6,6 +6,8 @@
  */
 namespace PhpTheme\Core;
 
+use Exception;
+
 trait RenderFileTrait
 {
 

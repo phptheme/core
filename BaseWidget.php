@@ -47,7 +47,7 @@ abstract class BaseWidget
     {
         $reflection = $this->getReflection();
         
-        return dirname($reflection->getFileName()) . '/views';
+        return dirname($reflection->getFileName()) . '/Views';
     }
 
     public function findViewFile($template)

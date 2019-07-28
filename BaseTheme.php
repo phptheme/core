@@ -48,8 +48,13 @@ abstract class BaseTheme extends ThemeAbstract
         return ob_get_clean();
     }
 
-    public function widget(string $class, array $params = [])
+    public function widget($class, array $params = [])
     {
+        if (!is_array($params) && !$params)
+        {
+            return '';
+        }
+
         $widget = $this->createWidget($class, $params);
         
         return $widget->run();

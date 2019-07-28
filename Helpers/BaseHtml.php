@@ -199,4 +199,11 @@ abstract class BaseHtml
         return static::shortTag('link', $options);
     }
 
+    public static function scriptFile($url, array $params = [])
+    {
+        $params['src'] = $url;
+
+        return static::tag('script', '', $params);
+    }
+
 }

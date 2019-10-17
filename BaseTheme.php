@@ -1,12 +1,12 @@
 <?php
 /**
- * @copyright Copyright (c) 2018-2019 PhpTheme Dev Team
+ * @author PhpTheme Dev Team
+ * @license MIT
  * @link http://getphptheme.com
- * @license MIT License
  */
 namespace PhpTheme\Core;
 
-use PhpTheme\Helpers\Html;
+use PhpTheme\Html\HtmlHelper;
 use PhpTheme\Html\Table;
 
 abstract class BaseTheme extends ThemeAbstract
@@ -35,7 +35,7 @@ abstract class BaseTheme extends ThemeAbstract
 
     public function escape($string, $encoding = 'utf-8', $specialCharsFlags = null)
     {
-        return Html::escape($string, $encoding, $specialCharsFlags);
+        return HtmlHelper::escape($string, $encoding, $specialCharsFlags);
     }
 
     public function beginContent()
@@ -62,7 +62,7 @@ abstract class BaseTheme extends ThemeAbstract
 
     public function createTable(array $options = [])
     {
-        $options = Html::mergeOptions($this->defaultTable, $options);
+        $options = HtmlHelper::mergeAttributes($this->defaultTable, $options);
 
         return $this->createWidget($this->tableClass, $options);
     }
@@ -71,7 +71,7 @@ abstract class BaseTheme extends ThemeAbstract
     {
         $table = $this->createTable($options);
 
-        return $table->run();
+        return $table->render();
     }
 
     public function createWidget(string $class, array $params = [])

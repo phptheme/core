@@ -1,14 +1,15 @@
 <?php
 /**
- * @copyright Copyright (c) 2018-2019 PhpTheme Dev Team
+ * @author PhpTheme Dev Team
+ * @license MIT
  * @link http://getphptheme.com
- * @license MIT License
  */
 namespace PhpTheme\Core;
 
 use ReflectionClass;
+use PhpTheme\Html\HtmlHelper;
 
-abstract class BaseWidget
+abstract class BaseWidget implements WidgetInterface
 {
 
     public $theme;
@@ -31,6 +32,11 @@ abstract class BaseWidget
         }
 
         return $return;
+    }
+
+    public function escape($string, $encoding = 'utf-8', $specialCharsFlags = null)
+    {
+        return HtmlHelper::escape($string, $encoding, $specialCharsFlags);
     }
 
     public function getReflection()

@@ -9,7 +9,7 @@ namespace PhpTheme\Core;
 use ReflectionClass;
 use PhpTheme\Html\HtmlHelper;
 
-abstract class BaseWidget implements WidgetInterface
+abstract class BaseWidget
 {
 
     public $theme;

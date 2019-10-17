@@ -9,18 +9,12 @@ namespace PhpTheme\Core;
 use PhpTheme\Html\HtmlHelper;
 use PhpTheme\Html\Table;
 
-abstract class BaseTheme extends ThemeAbstract
+abstract class BaseTheme
 {
 
     use RenderFileTrait;    
 
-    protected $tableClass = Table::class;
-
     public $baseUrl = '';
-
-    public $defaultTable = [];
-
-    public $defaultForm = [];
 
     public $head = '';
 
@@ -30,7 +24,6 @@ abstract class BaseTheme extends ThemeAbstract
 
     public function __construct()
     {
-        parent::__construct();
     }
 
     public function escape($string, $encoding = 'utf-8', $specialCharsFlags = null)
@@ -58,20 +51,6 @@ abstract class BaseTheme extends ThemeAbstract
         $widget = $this->createWidget($class, $params);
         
         return $widget->run();
-    }
-
-    public function createTable(array $options = [])
-    {
-        $options = HtmlHelper::mergeAttributes($this->defaultTable, $options);
-
-        return $this->createWidget($this->tableClass, $options);
-    }
-
-    public function table(array $options = [])
-    {
-        $table = $this->createTable($options);
-
-        return $table->render();
     }
 
     public function createWidget(string $class, array $params = [])

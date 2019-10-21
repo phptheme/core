@@ -44,11 +44,6 @@ abstract class BaseWidget extends View
         return HtmlHelper::escape($string, $encoding, $specialCharsFlags);
     }
 
-    public function escape($string, $encoding = 'utf-8', $specialCharsFlags = null)
-    {
-        return HtmlHelper::escape($string, $encoding, $specialCharsFlags);
-    }
-
     public function getReflection()
     {
         if (!$this->_reflection)

@@ -20,7 +20,7 @@ abstract class BaseWidget extends View
 
     abstract function run();
 
-    public static function factory($theme, array $params = [])
+    public static function factory(Theme $theme, array $params = [])
     {
         $class = get_called_class();
 

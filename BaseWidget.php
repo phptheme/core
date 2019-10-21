@@ -9,10 +9,8 @@ namespace PhpTheme\Core;
 use ReflectionClass;
 use PhpTheme\Html\HtmlHelper;
 
-abstract class BaseWidget
+abstract class BaseWidget extends View
 {
-
-    use RenderFileTrait;    
 
     public $theme;
 

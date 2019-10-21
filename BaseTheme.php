@@ -12,8 +12,6 @@ use PhpTheme\Html\Table;
 abstract class BaseTheme
 {
 
-    use RenderFileTrait;    
-
     public $baseUrl = '';
 
     public $head = '';
@@ -24,11 +22,6 @@ abstract class BaseTheme
 
     public function __construct()
     {
-    }
-
-    public function escape($string, $encoding = 'utf-8', $specialCharsFlags = null)
-    {
-        return HtmlHelper::escape($string, $encoding, $specialCharsFlags);
     }
 
     public function beginContent()
@@ -55,9 +48,7 @@ abstract class BaseTheme
 
     public function createWidget(string $class, array $params = [])
     {
-        $params['theme'] = $this;
-
-        $widget = $class::factory($params);
+        $widget = $class::factory($this, $params);
 
         return $widget;
     }

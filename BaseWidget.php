@@ -12,6 +12,8 @@ use PhpTheme\Html\HtmlHelper;
 abstract class BaseWidget
 {
 
+    use RenderFileTrait;    
+
     public $theme;
 
     public $content;
@@ -20,11 +22,11 @@ abstract class BaseWidget
 
     abstract function run();
 
-    public static function factory(array $params = [])
+    public static function factory($theme, array $params = [])
     {
         $class = get_called_class();
 
-        $return = new $class;
+        $return = new $class($theme);
 
         foreach($params as $key => $value)
         {
@@ -32,6 +34,16 @@ abstract class BaseWidget
         }
 
         return $return;
+    }
+
+    public function __construct($theme)
+    {
+        $this->theme = $theme;
+    }
+
+    public function escape($string, $encoding = 'utf-8', $specialCharsFlags = null)
+    {
+        return HtmlHelper::escape($string, $encoding, $specialCharsFlags);
     }
 
     public function escape($string, $encoding = 'utf-8', $specialCharsFlags = null)
@@ -65,7 +77,7 @@ abstract class BaseWidget
     {
         $filename = $this->findViewFile($template);
 
-        return $this->theme->renderFile($filename, $params);
+        return $this->renderFile($filename, $params);
     }
 
 }

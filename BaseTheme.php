@@ -20,6 +20,8 @@ abstract class BaseTheme
 
     public $endBody = '';
 
+    public $lang = 'en';
+
     public function __construct()
     {
     }

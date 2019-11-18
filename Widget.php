@@ -9,6 +9,6 @@ namespace PhpTheme\Core;
 abstract class Widget extends BaseWidget
 {
 
-    abstract function run();
+    abstract public function toString() : string;
 
 }

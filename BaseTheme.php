@@ -45,12 +45,17 @@ abstract class BaseTheme
 
         $widget = $this->createWidget($class, $params);
         
-        return $widget->run();
+        return $widget->toString();
     }
 
     public function createWidget(string $class, array $params = [])
     {
-        $widget = $class::factory($this, $params);
+        $widget = $class::factory($params);
+
+        if (property_exists($widget, 'theme'))
+        {
+            $widget->theme = $this;
+        }
 
         return $widget;
     }
@@ -70,7 +75,7 @@ abstract class BaseTheme
 
         $widget->content = $content;
 
-        $return = $widget->run();
+        $return = $widget->toString();
 
         if ($display)
         {

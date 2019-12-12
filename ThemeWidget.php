@@ -6,6 +6,9 @@
  */
 namespace PhpTheme\Core;
 
-class Theme extends BaseTheme
+abstract class ThemeWidget extends BaseThemeWidget
 {
+
+    abstract public function toString() : string;
+
 }

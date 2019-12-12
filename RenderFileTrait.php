@@ -1,28 +1,21 @@
 <?php
 /**
- * @author PhpTheme Dev Team
+ * @author PhpTheme Dev Team <dev@getphptheme.com>
  * @license MIT
  * @link http://getphptheme.com
  */
 namespace PhpTheme\Core;
-
-use Exception;
 
 trait RenderFileTrait
 {
 
     public function renderFile($filename, array $params = [])
     {
-        if (!is_file($filename))
-        {
-            throw new Exception('File not found: ' . $filename);
-        }
-
         extract($params);
 
         ob_start();
 
-        include($filename);
+        require($filename);
 
         $return = ob_get_contents();
 

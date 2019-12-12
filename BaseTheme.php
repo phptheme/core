@@ -1,26 +1,13 @@
 <?php
 /**
- * @author PhpTheme Dev Team
+ * @author PhpTheme Dev Team <dev@getphptheme.com>
  * @license MIT
  * @link http://getphptheme.com
  */
 namespace PhpTheme\Core;
 
-use PhpTheme\Html\HtmlHelper;
-use PhpTheme\Html\Table;
-
 abstract class BaseTheme
 {
-
-    public $baseUrl = '';
-
-    public $head = '';
-
-    public $beginBody = '';
-
-    public $endBody = '';
-
-    public $lang = 'en';
 
     public function __construct()
     {
@@ -50,11 +37,13 @@ abstract class BaseTheme
 
     public function createWidget(string $class, array $params = [])
     {
-        $widget = $class::factory($params);
-
-        if (property_exists($widget, 'theme'))
+        if (is_subclass_of($class, ThemeWidget::class, true))
         {
-            $widget->theme = $this;
+            $widget = new $class($this, $params);
+        }
+        else
+        {
+            $widget = new $class($params);
         }
 
         return $widget;

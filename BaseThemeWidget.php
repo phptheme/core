@@ -6,7 +6,7 @@
  */
 namespace PhpTheme\Core;
 
-abstract class BaseThemeWidget extends Widget
+abstract class BaseThemeWidget extends Widget implements ThemeWidgetInterface
 {
 
     protected $_theme;

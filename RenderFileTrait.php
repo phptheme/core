@@ -9,7 +9,7 @@ namespace PhpTheme\Core;
 trait RenderFileTrait
 {
 
-    public function renderFile($filename, array $params = [])
+    public function renderFile(string $filename, array $params = []) : string
     {
         extract($params);
 

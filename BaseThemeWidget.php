@@ -11,6 +11,8 @@ abstract class BaseThemeWidget extends Widget implements ThemeWidgetInterface
 
     protected $_theme;
 
+    public $content;
+
     abstract public function toString() : string;
 
     public function __construct(Theme $theme, array $params = [])

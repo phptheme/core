@@ -32,7 +32,7 @@ abstract class BaseWidget extends View
         return $this->toString();
     }
 
-    public function getViewPath()
+    public function getViewPath() : string
     {
         if (!$this->_viewPath)
         {
@@ -44,7 +44,7 @@ abstract class BaseWidget extends View
         return $this->_viewPath;
     }
 
-    public function render($template, $params = [])
+    public function render($template, $params = []) : string
     {
         return $this->renderFile($this->getViewPath() . DIRECTORY_SEPARATOR . $template . '.php', $params);
     }

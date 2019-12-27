@@ -29,7 +29,7 @@ abstract class BaseThemeWidget extends Widget implements ThemeWidgetInterface
             return $this->getTheme();
         }
 
-        return parent::__get($name);
+        return null;
     }
 
     public function getTheme()

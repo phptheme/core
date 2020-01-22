@@ -8,7 +8,4 @@ namespace PhpTheme\Core;
 
 abstract class ThemeWidget extends BaseThemeWidget
 {
-
-    abstract public function toString() : string;
-
 }

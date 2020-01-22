@@ -8,29 +8,14 @@ namespace PhpTheme\Core;
 
 use ReflectionClass;
 
-abstract class BaseWidget extends View
+abstract class BaseWidget extends Tag
 {
+
+    use RenderFileTrait;
 
     const VIEWS_DIR = 'Views';
 
-    abstract public function toString() : string;
-
     protected $_viewPath;
-
-    public function __construct(array $params = [])
-    {
-        parent::__construct();
-
-        foreach($params as $key => $value)
-        {
-            $this->$key = $value;
-        }
-    }
-
-    public function __toString()
-    {
-        return $this->toString();
-    }
 
     public function getViewPath() : string
     {

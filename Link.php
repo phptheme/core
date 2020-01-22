@@ -6,6 +6,6 @@
  */
 namespace PhpTheme\Core;
 
-abstract class Widget extends BaseWidget
+class Link extends BaseLink
 {
 }

@@ -6,6 +6,8 @@
  */
 namespace PhpTheme\Core;
 
+use PhpTheme\Html\HtmlHelper;
+
 abstract class BaseTag
 {
 

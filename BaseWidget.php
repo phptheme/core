@@ -7,6 +7,7 @@
 namespace PhpTheme\Core;
 
 use ReflectionClass;
+use PhpTheme\View\RenderFileTrait;
 
 abstract class BaseWidget extends Tag
 {
@@ -23,7 +24,9 @@ abstract class BaseWidget extends Tag
         {
             $reflection = new ReflectionClass($this);
 
-            $this->_viewPath = dirname($reflection->getFileName()) . (static::VIEWS_DIR ? (DIRECTORY_SEPARATOR . static::VIEWS_DIR) : '');
+            $this->_viewPath = dirname($reflection->getFileName());
+
+            $this->_viewPath .= static::VIEWS_DIR ? (DIRECTORY_SEPARATOR . static::VIEWS_DIR) : '';
         }
     
         return $this->_viewPath;

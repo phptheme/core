@@ -11,6 +11,7 @@
         "phptheme/tag": "*",
         "phptheme/theme": "*",
         "phptheme/widget": "*",
-        "phptheme/escaper": "*"
+        "phptheme/escaper": "*",
+        "phptheme/link": "*"
     }
 }

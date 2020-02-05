@@ -8,10 +8,10 @@
     },
     "require": {
         "phptheme/html-helper": "*",
+        "phptheme/html-escaper": "*",
         "phptheme/tag": "*",
         "phptheme/theme": "*",
         "phptheme/widget": "*",
-        "phptheme/escaper": "*",
         "phptheme/link": "*",
         "phptheme/menu": "*"
     }

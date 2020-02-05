@@ -6,11 +6,6 @@
  */
 namespace PhpTheme\Core;
 
-class Grid extends \PhpTheme\Grid\Grid
+class TableRow extends \PhpTheme\Table\TableRow
 {
-
-    const GRID_CELL = GridCell::class;
-    
-    const GRID_HEADER = GridHeader::class;
-
 }

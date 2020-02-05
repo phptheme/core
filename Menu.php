@@ -8,4 +8,7 @@ namespace PhpTheme\Core;
 
 class Menu extends \PhpTheme\Menu\Menu
 {
+
+    const MENU_ITEM = MenuItem::class;
+    
 }

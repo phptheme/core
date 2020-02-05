@@ -6,9 +6,6 @@
  */
 namespace PhpTheme\Core;
 
-interface WidgetInterface
+interface WidgetInterface extends \PhpTheme\Widget\WidgetInterface
 {
-
-    public function __construct(Theme $theme, array $params = []);
-
 }

@@ -6,6 +6,6 @@
  */
 namespace PhpTheme\Core;
 
-interface ThemeInterface
+interface ThemeInterface extends \PhpTheme\Theme\ThemeInterface
 {
 }

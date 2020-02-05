@@ -6,6 +6,6 @@
  */
 namespace PhpTheme\Core;
 
-abstract class Widget extends \PhpTheme\Widget\Widget
+class HtmlHelper extends \PhpTheme\HtmlHelper\HtmlHelper
 {
 }

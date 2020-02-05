@@ -37,7 +37,7 @@ abstract class BaseTheme implements ThemeInterface
 
     public function createWidget(string $class, array $params = [])
     {
-        if (is_subclass_of($class, ThemeWidgetInterface::class, true))
+        if (is_subclass_of($class, WidgetInterface::class, true))
         {
             $widget = new $class($this, $params);
         }

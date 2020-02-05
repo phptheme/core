@@ -6,35 +6,35 @@
  */
 namespace PhpTheme\Core;
 
-use ReflectionClass;
-use PhpTheme\View\RenderFileTrait;
+use PhpTheme\Widget\Widget;
 
-abstract class BaseWidget extends Tag
+abstract class BaseWidget extends Widget implements WidgetInterface
 {
 
-    use RenderFileTrait;
+    protected $_theme;
 
-    const VIEWS_DIR = 'Views';
+    public $content;
 
-    protected $_viewPath;
-
-    public function getViewPath() : string
+    public function __construct(Theme $theme, array $params = [])
     {
-        if (!$this->_viewPath)
-        {
-            $reflection = new ReflectionClass($this);
+        $this->_theme = $theme;
 
-            $this->_viewPath = dirname($reflection->getFileName());
-
-            $this->_viewPath .= static::VIEWS_DIR ? (DIRECTORY_SEPARATOR . static::VIEWS_DIR) : '';
-        }
-    
-        return $this->_viewPath;
+        parent::__construct($params);
     }
 
-    public function render($template, $params = []) : string
+    public function __get(string $name)
     {
-        return $this->renderFile($this->getViewPath() . DIRECTORY_SEPARATOR . $template . '.php', $params);
+        if ($name == 'theme')
+        {
+            return $this->getTheme();
+        }
+
+        return null;
+    }
+
+    public function getTheme()
+    {
+        return $this->_theme;
     }
 
 }

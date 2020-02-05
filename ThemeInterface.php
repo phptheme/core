@@ -6,9 +6,6 @@
  */
 namespace PhpTheme\Core;
 
-interface ThemeWidgetInterface
+interface ThemeInterface
 {
-
-    public function __construct(Theme $theme, array $params = []);
-
 }

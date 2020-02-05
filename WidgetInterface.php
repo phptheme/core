@@ -6,6 +6,9 @@
  */
 namespace PhpTheme\Core;
 
-class Tag extends BaseTag
+interface WidgetInterface
 {
+
+    public function __construct(Theme $theme, array $params = []);
+
 }

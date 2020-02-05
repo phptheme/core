@@ -6,7 +6,7 @@
  */
 namespace PhpTheme\Core;
 
-abstract class BaseTheme
+abstract class BaseTheme implements ThemeInterface
 {
 
     public function __construct()

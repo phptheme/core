@@ -12,6 +12,7 @@
         "phptheme/theme": "*",
         "phptheme/widget": "*",
         "phptheme/escaper": "*",
-        "phptheme/link": "*"
+        "phptheme/link": "*",
+        "phptheme/menu": "*"
     }
 }

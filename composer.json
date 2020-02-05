@@ -13,6 +13,7 @@
         "phptheme/theme": "*",
         "phptheme/widget": "*",
         "phptheme/link": "*",
-        "phptheme/menu": "*"
+        "phptheme/menu": "*",
+        "phptheme/grid": "*"
     }
 }
